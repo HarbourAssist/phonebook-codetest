@@ -7,6 +7,11 @@ import { Component, Inject } from '@angular/core';
   styleUrls: ['./phone-book.component.css']
 })
 export class PhoneBookComponent {
+
+  firstName: string = "";
+  surname: string = "";
+  phoneNumber: string = "";
+
   constructor(
     private http: HttpClient,
     @Inject('BASE_URL') private baseUrl: string

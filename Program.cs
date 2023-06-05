@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using PhoneBook.Models;
+using PhoneBook.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +10,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<PhoneBookContext>(options =>
 {
-    options.UseSqlServer("Server=.\\SQLExpress;Database=PhoneBook;Trusted_Connection=True;TrustServerCertificate=true");
+    options.UseSqlServer("Server=localhost\\MSSQLSERVER04;Database=PhoneBook;Trusted_Connection=True;TrustServerCertificate=true");
 });
 
 var app = builder.Build();
