@@ -5,8 +5,13 @@
 
   <div ng-app="">
     <div *ngIf="showTable" id="tableSection" style="margin-bottom: 5px;" ng-show="showTable">
-      <div style="margin-top: 15px;">
-        <button class="btn btn-success float-right" (click)="showTable = false">Add</button>
+      <div class="row mb-4">
+        <div class="col-6">
+          <button class="btn btn-info float-left" (click)="showTable = false">Info</button>
+        </div>
+        <div class="col-6">
+          <button class="btn btn-success float-right" (click)="showTable = false">Add</button>
+        </div>
       </div>
       <div class="table-responsive">
         <table class="table table-striped custom-table">
@@ -24,10 +29,8 @@
               <td>{{phoneBook.surname}}</td>
               <td><a>{{phoneBook.phoneNumber}}</a></td>
               <td>
-                <div style="margin: auto; display: flex; justify-content: center;">
-                  <button class="btn btn-success" (click)="bindSelected(phoneBook)" style="margin-right: 5%">Edit</button>
-                  <button class="btn btn-primary" (click)="RemovePhonebookEntry(phoneBook.phoneBookEntryId)">Remove</button>
-                </div>
+                <button class="btn btn-primary float-right" (click)="RemovePhonebookEntry(phoneBook.phoneBookEntryId)">Remove</button>
+                <button class="btn btn-success float-right" (click)="bindSelected(phoneBook)" style="margin-right: 5%">Edit</button>
               </td>
             </tr>
           </tbody>
