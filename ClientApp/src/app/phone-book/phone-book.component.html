@@ -4,34 +4,41 @@
 <body>
 
   <div ng-app="">
-
-    <table style="border: 2px solid black; width: 100%">
-      <tr style="border: 2px solid black">
-        <th style="border: 2px solid black">Id</th>
-        <th style="border: 2px solid black">First Name</th>
-        <th style="border: 2px solid black">Surname</th>
-        <th style="border: 2px solid black">Phone Number</th>
-      </tr>
-
-      <tbody>
-        <tr style="border: 2px solid black">
-          <td style="border: 2px solid black">Sample</td>
-          <td style="border: 2px solid black">Sample</td>
-          <td style="border: 2px solid black">Sample</td>
-          <td style="border: 2px solid black">Sample</td>
+    <div id="tableSection" style="margin-bottom: 5px;">
+      <table style="border: 2px solid black; width: 100%">
+        <tr>
+          <th>Id</th>
+          <th>First Name</th>
+          <th>Surname</th>
+          <th>Phone Number</th>
         </tr>
-      </tbody>
-    </table>
-    <p>Input something in the input box:</p>
 
-    <p>Name : <input type="text" ng-model="namfirstNamee" placeholder="Enter name here"></p>
-    <h1>Hello {{firstName}}</h1>
+        <tbody>
+          <tr>
+            <td style="border: 2px solid black">Sample Id</td>
+            <td style="border: 2px solid black">Sample Firstname</td>
+            <td style="border: 2px solid black">Sample Surname</td>
+            <td style="border: 2px solid black">Sample PhoneNo</td>
+            <td style="border: 2px solid black">
+              <div style="margin: auto; display: flex; justify-content: center;">
+                <button style="margin-right: 5%">Edit</button>
+                <button>Remove</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <br />
 
-    <p>Name : <input type="text" ng-model="surname" placeholder="Enter name here"></p>
-    <h1>Hello {{surname}}</h1>
 
-    <p>Name : <input type="text" ng-model="phoneNumber" placeholder="Enter name here"></p>
-    <h1>Hello {{phoneNumber}}</h1>
+    <div style="margin-top: 15px;">
+      <span>Not seeing your info? Click <b>Register</b></span>
+      <br />
+      <button>Register</button>
+    </div>
+    <br />
+
   </div>
 
 </body>
