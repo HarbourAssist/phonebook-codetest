@@ -31,7 +31,7 @@ namespace PhoneBook.Controllers
         }
 
         [ActionName("SaveNewPhonebookEntry")]
-        [Route("api/[controller]/SaveNewPhonebookEntry")]
+        [Route("/[controller]/SaveNewPhonebookEntry")]
         [HttpPost]
         public async Task<IActionResult> SaveNewPhonebookEntry(PhoneBookEntry model)
         {
@@ -48,7 +48,7 @@ namespace PhoneBook.Controllers
         }
 
         [ActionName("UpdatePhonebookEntry")]
-        [Route("api/[controller]/UpdatePhonebookEntry")]
+        [Route("/[controller]/UpdatePhonebookEntry")]
         [HttpPut]
         public async Task<IActionResult> UpdatePhonebookEntry(PhoneBookEntry model)
         {
@@ -65,7 +65,7 @@ namespace PhoneBook.Controllers
         }
 
         [ActionName("RemovePhonebookEntry")]
-        [Route("api/[controller]/RemovePhonebookEntry")]
+        [Route("/[controller]/RemovePhonebookEntry")]
         [HttpDelete]
         public async Task<IActionResult> RemovePhonebookEntry(long id)
         {

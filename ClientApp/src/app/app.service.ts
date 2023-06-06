@@ -18,14 +18,14 @@ export class AppService {
   }
 
 
-  SaveNewPhonebookEntry(phoneRequest: PhoneBookEntry): Observable<PhoneBookEntry> {
+  SaveNewPhonebookEntry(phoneRequest: PhoneBookEntry): Observable<string> {
     const phonebookEntryRequest: PhonebookEntryRequest = {
       phoneBookEntryId: phoneRequest.phoneBookEntryId,
       firstname: phoneRequest.firstname,
       surname: phoneRequest.surname,
       phoneNumber: phoneRequest.phoneNumber,
     }
-    return this.httpClient.post<PhoneBookEntry>(this.baseApiUrl + '/phonebook/SaveNewPhonebookEntry', phonebookEntryRequest);
+    return this.httpClient.post(this.baseApiUrl + '/phonebook/SaveNewPhonebookEntry', phonebookEntryRequest, {responseType: 'text'});
   }
 
   UpdatePhonebookEntry(phoneBookEntryId: number, phoneRequest: PhoneBookEntry): Observable<PhoneBookEntry> {
