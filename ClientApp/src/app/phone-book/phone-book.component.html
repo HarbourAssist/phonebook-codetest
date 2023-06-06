@@ -10,7 +10,7 @@
           <button class="btn btn-info float-left" [routerLink]="['/']">Info</button>
         </div>
         <div class="col-6">
-          <button class="btn btn-success float-right" (click)="showTable = false">Add</button>
+          <button class="btn btn-success float-right" (click)="clearSelected()">Add</button>
         </div>
       </div>
       <div class="table-responsive">
@@ -40,14 +40,20 @@
     <br />
 
 
-    <div *ngIf="showTable == false" id="addSection" class="" style="border: solid 2px white; border-radius: 5px; position: absolute; margin: auto; width: 600px;">
-      <div id="headingSection" style="display: flex; justify-content: center;">
-        <h2>User Registration</h2>
+    <div *ngIf="showTable == false" id="addSection" class="" style="border: solid 2px white; border-radius: 50px; margin: auto; width: 600px;">
+      <div id="headingSection" class="d-flex mt-2" style="justify-content: center; color: white">
+        <div *ngIf="selectedPhoneBookEntry.phoneBookEntryId != 0">
+          <h1>User Details Update</h1>
+        </div>
+        <div *ngIf="selectedPhoneBookEntry.phoneBookEntryId == 0">
+          <h1>User Details Add</h1>
+        </div>
       </div>
-      <div class="row mt-4">
+
+      <div class="row mt-4 ml-2">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-          <label class="mr-2" style="color: white; width: 150px;">First Name:  </label>
-          <input [(ngModel)]="selectedPhoneBookEntry.firstname" class="mr-2" type="text" name="firstname" minlength="3" required #name="ngModel">
+          <label class="mr-4" style="color: white; width: 150px;"><h3>First Name:  </h3></label>
+          <input [(ngModel)]="selectedPhoneBookEntry.firstname" style="width: 60%;" class="mr-2" type="text" name="firstname" minlength="3" required #name="ngModel">
           <!--<div *ngIf="firstname.invalid && (selectedPhoneBookEntry.firstname.dirty || selectedPhoneBookEntry.firstname.touched)"
            class="alert">
 
@@ -66,20 +72,20 @@
 
       <br>
       <br>
-      <div class="row">
+      <div class="row mt-4 ml-2">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-          <label class="mr-2" style="color: white; width: 150px;">Surname: </label>
-          <input [(ngModel)]="selectedPhoneBookEntry.surname" class="mr-2" type="text" name="surname" required>
+          <label class="mr-4" style="color: white; width: 150px;"><h3>Surname: </h3></label>
+          <input [(ngModel)]="selectedPhoneBookEntry.surname" class="mr-2" style="width: 60%;" type="text" name="surname" required>
 
         </div>
       </div>
       <br>
       <br>
 
-      <div class="row">
+      <div class="row mt-4 ml-2">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-          <label class="mr-2" style="color: white; width: 150px;">Phone Number:  </label>
-          <input [(ngModel)]="selectedPhoneBookEntry.phoneNumber" class="mr-2" type="text" name="phoneNumber" required minlength="10">
+          <label class="mr-4" style="color: white; width: 150px;"><h3>Phone No:  </h3></label>
+          <input [(ngModel)]="selectedPhoneBookEntry.phoneNumber" class="mr-2" style="width: 60%;" type="text" name="phoneNumber" required minlength="10">
 
         </div>
       </div>
@@ -87,7 +93,28 @@
       <br>
 
       <div class="row mb-4">
-        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 float-right text-right">
+        <div id="updateSection" *ngIf="selectedPhoneBookEntry.phoneBookEntryId != 0"  class="m-auto">
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 float-right text-right">
+            <button class="btn btn-success" type="submit" (click)="UpdatePhonebookEntry()" name="addButton">Update</button>
+          </div>
+
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 float-left text-left">
+            <button class="btn btn-warning" type="submit" (click)="showTable = true" name="addButton">Back</button>
+          </div>
+        </div>
+
+        <div id="addSection" *ngIf="selectedPhoneBookEntry.phoneBookEntryId == 0" class="m-auto">
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 float-right text-right">
+            <button class="btn btn-success" type="submit" (click)="SaveNewPhonebookEntry()" name="addButton">Submit</button>
+          </div>
+
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 float-left text-left">
+            <button class="btn btn-warning" type="submit" (click)="showTable = true" name="addButton">Back</button>
+          </div>
+        </div>
+
+
+        <!--<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 float-right text-right">
           <button class="btn btn-success" *ngIf="selectedPhoneBookEntry.phoneBookEntryId != 0" type="submit" (click)="UpdatePhonebookEntry()" name="addButton">Update</button>
         </div>
 
@@ -95,9 +122,9 @@
           <button class="btn btn-success" *ngIf="selectedPhoneBookEntry.phoneBookEntryId == 0" type="submit" (click)="SaveNewPhonebookEntry()" name="addButton">Submit</button>
         </div>
 
-        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 float-right text-right">
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 float-left text-right">
           <button class="btn btn-warning" type="submit" (click)="showTable = true" name="addButton">Back</button>
-        </div>
+        </div>-->
       </div>
 
         </div>

@@ -90,5 +90,14 @@ export class PhoneBookComponent {
     this.showTable = false;
   };
 
+  clearSelected() {
+    this.selectedPhoneBookEntry.phoneBookEntryId = 0;
+    this.selectedPhoneBookEntry.firstname = "";
+    this.selectedPhoneBookEntry.surname = "";
+    this.selectedPhoneBookEntry.phoneNumber = "";
+
+    this.showTable = false;
+  };
+
 }
 
