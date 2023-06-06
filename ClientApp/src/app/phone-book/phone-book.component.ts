@@ -12,6 +12,14 @@ import { PhoneBookEntry } from '../models/phone-book-entry';
 export class PhoneBookComponent {
   phoneBookEntries: PhoneBookEntry[] = [];
 
+  selectedPhoneBookEntry: PhoneBookEntry = {
+    phoneBookEntryId: 0,
+    firstname: "",
+    surname: "",
+    phoneNumber: "",
+  };
+
+  showTable = true;
 
   constructor(
     private http: HttpClient,
@@ -33,7 +41,8 @@ export class PhoneBookComponent {
       );
   }
   
-  RemovePhonebookEntry(phoneBookEntryId:number): void {
+  RemovePhonebookEntry(phoneBookEntryId:number) {
+    debugger
     this.appservice.RemovePhonebookEntry(phoneBookEntryId)
       .subscribe(
         (successResponse) => {
@@ -48,13 +57,13 @@ export class PhoneBookComponent {
     this.appservice.SaveNewPhonebookEntry(phoneBookEntry)
       .subscribe(
         (successResponse) => {
+
         },(errorResponse) => {
           console.log(errorResponse);
         })
   }
 
   UpdatePhonebookEntry(phoneBookEntryId:number,phoneBookEntry:PhoneBookEntry){
-   
       this.appservice.UpdatePhonebookEntry(phoneBookEntryId,phoneBookEntry)
         .subscribe(
           (successResponse) => {
@@ -64,8 +73,17 @@ export class PhoneBookComponent {
 
           }
         )
-
     }
+
+    bindSelected(phoneBookEntry:PhoneBookEntry){
+      debugger
+      this.selectedPhoneBookEntry.phoneBookEntryId = phoneBookEntry.phoneBookEntryId;
+      this.selectedPhoneBookEntry.firstname = phoneBookEntry.firstname;
+      this.selectedPhoneBookEntry.surname = phoneBookEntry.surname;
+      this.selectedPhoneBookEntry.phoneNumber = phoneBookEntry.phoneNumber;
+
+      this.showTable = false;
+    };
 
 }
 
