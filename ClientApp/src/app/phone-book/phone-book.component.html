@@ -53,8 +53,10 @@
       <br>
       <br>
 
-      <button *ngIf="selectedPhoneBookEntry.phoneBookEntryId != 0" type="submit" (click)="UpdatePhonebookEntry()" name="addButton">Update</button>
-      <button *ngIf="selectedPhoneBookEntry.phoneBookEntryId == 0" type="submit" (click)="SaveNewPhonebookEntry()" name="addButton">Submit</button>
+      <button class="btn btn-success" *ngIf="selectedPhoneBookEntry.phoneBookEntryId != 0" type="submit" (click)="UpdatePhonebookEntry()" name="addButton">Update</button>
+      <button class="btn btn-success" *ngIf="selectedPhoneBookEntry.phoneBookEntryId == 0" type="submit" (click)="SaveNewPhonebookEntry()" name="addButton">Submit</button>
+
+      <button class="btn btn-warning" type="submit" (click)="showTable = true" name="addButton">Back</button>
     </div>
     <br />
 
