@@ -63,9 +63,9 @@ h2 {
     .custom-table tbody tr:hover td, .custom-table tbody tr:focus td {
       color: #fff; }
       .custom-table tbody tr:hover td a, .custom-table tbody tr:focus td a {
-        color: #fdd114; }
+        color: #00c471; }
       .custom-table tbody tr:hover td .more, .custom-table tbody tr:focus td .more {
-        color: #fdd114; }
+        color: #00c471; }
   .custom-table .td-box-wrap {
     padding: 0; }
   .custom-table .box {
