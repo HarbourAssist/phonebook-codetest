@@ -82,7 +82,7 @@ public partial class PhoneBookEntry
         catch (Exception e)
         {
             //LOG ERROR to LogFile with actual error details and throw custom error to front end
-            throw new Exception("Saved failed, please check your entries and try again");
+            throw e;
         }
     }
 
