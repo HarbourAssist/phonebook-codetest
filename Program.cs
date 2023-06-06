@@ -1,8 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using PhoneBook.Models;
 using PhoneBook.Repository;
+using static System.Net.Mime.MediaTypeNames;
 
 var builder = WebApplication.CreateBuilder(args);
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 // Add services to the container.
 
@@ -11,6 +13,18 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<PhoneBookContext>(options =>
 {
     options.UseSqlServer("Server=localhost\\MSSQLSERVER04;Database=PhoneBook;Trusted_Connection=True;TrustServerCertificate=true");
+});
+
+// Add Cors
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("angularApplication", (builder) =>
+    {
+        builder
+        .WithOrigins("http://localhost:44425") // specifying the allowed origin
+        .WithMethods("GET", "POST", "PUT", "DELETE") // defining the allowed HTTP method
+        .AllowAnyHeader(); // allowing any header to be sent
+    });
 });
 
 var app = builder.Build();
@@ -22,9 +36,12 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+
+app.UseCors(MyAllowSpecificOrigins);
 
 app.MapControllerRoute(
     name: "default",

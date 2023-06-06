@@ -9,7 +9,7 @@ import { PhonebookEntryRequest } from './models/phonebookEntryRequest';
 })
 export class AppService {
 
-  private baseApiUrl = 'https://localhost:44398'
+  private baseApiUrl = 'https://localhost:44425'
 
   constructor(private httpClient: HttpClient) { }
   
