@@ -52,13 +52,16 @@ export class PhoneBookComponent {
         })
   }
 
-  SaveNewPhonebookEntry(phoneBookEntry: PhoneBookEntry) {
-
-    this.appservice.SaveNewPhonebookEntry(phoneBookEntry)
+  SaveNewPhonebookEntry() {
+    
+    var temp = this.selectedPhoneBookEntry;
+    this.appservice.SaveNewPhonebookEntry(this.selectedPhoneBookEntry)
       .subscribe(
         (successResponse) => {
+          debugger
 
         },(errorResponse) => {
+          debugger
           console.log(errorResponse);
         })
   }
