@@ -10,8 +10,7 @@ import { PhoneBookEntry } from '../models/phone-book-entry';
   styleUrls: ['./phone-book.component.css']
 })
 export class PhoneBookComponent {
-  phoneBookEntry: PhoneBookEntry[] = [];
-  phoneBookEntries?: PhoneBookEntry;
+  phoneBookEntries: PhoneBookEntry[] = [];
 
 
   constructor(
@@ -26,7 +25,7 @@ export class PhoneBookComponent {
       .subscribe(
         (successResponse) => {
           debugger
-          this.phoneBookEntry = successResponse
+          this.phoneBookEntries = successResponse
         },
         (errorResponse) => {
           console.log(errorResponse);
