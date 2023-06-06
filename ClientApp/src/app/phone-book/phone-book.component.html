@@ -40,30 +40,70 @@
     <br />
 
 
-    <div *ngIf="showTable == false" id="addSection">
-      <label>First Name:  </label>
-      <input [(ngModel)]="selectedPhoneBookEntry.firstname" type="text" name="firstname" required>
+    <div *ngIf="showTable == false" id="addSection" class="" style="border: solid 2px white; border-radius: 5px; position: absolute; margin: auto; width: 600px;">
+      <div id="headingSection" style="display: flex; justify-content: center;">
+        <h2>User Registration</h2>
+      </div>
+      <div class="row mt-4">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <label class="mr-2" style="color: white; width: 150px;">First Name:  </label>
+          <input [(ngModel)]="selectedPhoneBookEntry.firstname" class="mr-2" type="text" name="firstname" minlength="3" required #name="ngModel">
+          <!--<div *ngIf="firstname.invalid && (selectedPhoneBookEntry.firstname.dirty || selectedPhoneBookEntry.firstname.touched)"
+           class="alert">
+
+        <div *ngIf="selectedPhoneBookEntry.firstname.errors?.['required']">
+          Name is required.
+        </div>
+        <div *ngIf="selectedPhoneBookEntry.firstname.errors?.['minlength']">
+          Name must be at least 3 characters long.
+        </div>
+
+      </div>-->
+
+
+        </div>
+      </div>
+
+      <br>
+      <br>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <label class="mr-2" style="color: white; width: 150px;">Surname: </label>
+          <input [(ngModel)]="selectedPhoneBookEntry.surname" class="mr-2" type="text" name="surname" required>
+
+        </div>
+      </div>
       <br>
       <br>
 
-      <label>Surname: </label>
-      <input [(ngModel)]="selectedPhoneBookEntry.surname" type="text" name="surname" required>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <label class="mr-2" style="color: white; width: 150px;">Phone Number:  </label>
+          <input [(ngModel)]="selectedPhoneBookEntry.phoneNumber" class="mr-2" type="text" name="phoneNumber" required minlength="10">
+
+        </div>
+      </div>
       <br>
       <br>
 
-      <label>Phone Number:  </label>
-      <input [(ngModel)]="selectedPhoneBookEntry.phoneNumber" type="text" name="phoneNumber" required minlength="10">
-      <br>
-      <br>
+      <div class="row mb-4">
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 float-right text-right">
+          <button class="btn btn-success" *ngIf="selectedPhoneBookEntry.phoneBookEntryId != 0" type="submit" (click)="UpdatePhonebookEntry()" name="addButton">Update</button>
+        </div>
 
-      <button class="btn btn-success" *ngIf="selectedPhoneBookEntry.phoneBookEntryId != 0" type="submit" (click)="UpdatePhonebookEntry()" name="addButton">Update</button>
-      <button class="btn btn-success" *ngIf="selectedPhoneBookEntry.phoneBookEntryId == 0" type="submit" (click)="SaveNewPhonebookEntry()" name="addButton">Submit</button>
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 float-left text-left">
+          <button class="btn btn-success" *ngIf="selectedPhoneBookEntry.phoneBookEntryId == 0" type="submit" (click)="SaveNewPhonebookEntry()" name="addButton">Submit</button>
+        </div>
 
-      <button class="btn btn-warning" type="submit" (click)="showTable = true" name="addButton">Back</button>
-    </div>
-    <br />
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 float-right text-right">
+          <button class="btn btn-warning" type="submit" (click)="showTable = true" name="addButton">Back</button>
+        </div>
+      </div>
 
-  </div>
+        </div>
+        <br />
+
+      </div>
 
 </body>
 </html>

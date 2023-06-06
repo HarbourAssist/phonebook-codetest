@@ -48,6 +48,7 @@ export class PhoneBookComponent {
     this.appservice.SaveNewPhonebookEntry(this.selectedPhoneBookEntry)
       .subscribe(
         (successResponse) => {
+          this.GetAllEntries();
           this.showTable = true;
           console.log(successResponse);
 
@@ -60,6 +61,7 @@ export class PhoneBookComponent {
     this.appservice.UpdatePhonebookEntry(this.selectedPhoneBookEntry.phoneBookEntryId, this.selectedPhoneBookEntry)
       .subscribe(
         (successResponse) => {
+          this.GetAllEntries();
           this.showTable = true;
         },
         (errorResponse) => {
