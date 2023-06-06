@@ -11,6 +11,7 @@ import { PhoneBookEntry } from '../models/phone-book-entry';
 })
 export class PhoneBookComponent {
   phoneBookEntry: PhoneBookEntry[] = [];
+  phoneBookEntries?: PhoneBookEntry;
 
 
   constructor(
@@ -18,20 +19,54 @@ export class PhoneBookComponent {
     private appservice: AppService,
     // @Inject('BASE_URL') private baseUrl: string
   ) {
-    
+
   }
   ngOnInit(): void {
-    // fetch Students
     this.appservice.GetAllEntries()
-    .subscribe(                               
-      (successResponse) => {
-
-       this.phoneBookEntry = successResponse 
-      },
-      (errorResponse) => {
-        console.log(errorResponse);
-      }
-    );
+      .subscribe(
+        (successResponse) => {
+          debugger
+          this.phoneBookEntry = successResponse
+        },
+        (errorResponse) => {
+          console.log(errorResponse);
+        }
+      );
   }
+  
+  RemovePhonebookEntry(phoneBookEntryId:number): void {
+    this.appservice.RemovePhonebookEntry(phoneBookEntryId)
+      .subscribe(
+        (successResponse) => {
+        },
+        (errorResponse) => {
+          console.log(errorResponse);
+        })
+  }
+
+  SaveNewPhonebookEntry(phoneBookEntry: PhoneBookEntry) {
+
+    this.appservice.SaveNewPhonebookEntry(phoneBookEntry)
+      .subscribe(
+        (successResponse) => {
+        },(errorResponse) => {
+          console.log(errorResponse);
+        })
+  }
+
+  UpdatePhonebookEntry(phoneBookEntryId:number,phoneBookEntry:PhoneBookEntry){
+   
+      this.appservice.UpdatePhonebookEntry(phoneBookEntryId,phoneBookEntry)
+        .subscribe(
+          (successResponse) => {
+            
+          },
+          (errorResponse) => {
+
+          }
+        )
+
+    }
+
 }
 
