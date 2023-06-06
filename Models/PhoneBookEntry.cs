@@ -130,7 +130,7 @@ public partial class PhoneBookEntry
             if (saveResult)
             {
                 //return save result message
-                return "Phonebook entry saved successfully";
+                return "Phonebook entry updated successfully";
             }
 
             //return save result

@@ -70,7 +70,7 @@ namespace PhoneBook.Repository
                 var result = _context.PhoneBookEntries.Add(phoneBookEntry);
                 await _context.SaveChangesAsync();
 
-                //check if save was successfult
+                //check if save was successfull
                 return result.Entity.PhoneBookEntryId > 0;
             }
             catch (Exception e)
