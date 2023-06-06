@@ -13,11 +13,8 @@ export class AppService {
 
   constructor(private httpClient: HttpClient) { }
   
-  getData() {
-    let url = "https://localhost:44425/api/PhoneBook/GetAllEntries"
-  }
   GetAllEntries(): Observable<any> {
-    return this.httpClient.get<any>(this.baseApiUrl + '/PhoneBook/GetAllEntries');
+    return this.httpClient.get<any>(this.baseApiUrl + '/phonebook/GetAllEntries');
   }
 
 
@@ -28,7 +25,7 @@ export class AppService {
       surname: phoneRequest.surname,
       phoneNumber: phoneRequest.phoneNumber,
     }
-    return this.httpClient.post<PhoneBookEntry>(this.baseApiUrl + '/PhoneBook/SaveNewPhonebookEntry', phonebookEntryRequest);
+    return this.httpClient.post<PhoneBookEntry>(this.baseApiUrl + '/phonebook/SaveNewPhonebookEntry', phonebookEntryRequest);
   }
 
   UpdatePhonebookEntry(phoneBookEntryId: number, phoneRequest: PhoneBookEntry): Observable<PhoneBookEntry> {
@@ -38,10 +35,10 @@ export class AppService {
       surname: phoneRequest.surname,
       phoneNumber: phoneRequest.phoneNumber,
     }
-    return this.httpClient.put<PhoneBookEntry>(this.baseApiUrl + '/PhoneBook/UpdatePhonebookEntry/' + phoneBookEntryId, phonebookEntryRequest);
+    return this.httpClient.put<PhoneBookEntry>(this.baseApiUrl + '/phonebook/UpdatePhonebookEntry/' + phoneBookEntryId, phonebookEntryRequest);
   }
 
   RemovePhonebookEntry(phoneBookEntryId: number): Observable<PhoneBookEntry> {
-    return this.httpClient.delete<PhoneBookEntry>(this.baseApiUrl + '/PhoneBook/RemovePhonebookEntry/' + phoneBookEntryId);
+    return this.httpClient.delete<PhoneBookEntry>(this.baseApiUrl + '/phonebook/RemovePhonebookEntry/' + phoneBookEntryId);
   }
 }

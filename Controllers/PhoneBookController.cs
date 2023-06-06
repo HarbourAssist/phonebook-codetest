@@ -15,7 +15,7 @@ namespace PhoneBook.Controllers
         }
 
         [ActionName("GetAllEntries")]
-        [Route("api/[controller]/GetAllEntries")]
+        [Route("/[controller]/GetAllEntries")]
         [HttpGet]
         public async Task<IActionResult> GetAllEntries()
         {
