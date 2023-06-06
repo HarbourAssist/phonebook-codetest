@@ -36,9 +36,12 @@ export class PhoneBookComponent {
     this.appservice.GetAllEntries()
       .subscribe(
         (successResponse) => {
+          console.log(successResponse);
+
           this.phoneBookEntries = successResponse
         },
         (errorResponse) => {
+          alert(errorResponse);
           console.log(errorResponse);
         }
       );
@@ -48,11 +51,14 @@ export class PhoneBookComponent {
     this.appservice.SaveNewPhonebookEntry(this.selectedPhoneBookEntry)
       .subscribe(
         (successResponse) => {
-          this.GetAllEntries();
-          this.showTable = true;
+          alert(successResponse);
           console.log(successResponse);
 
-        },(errorResponse) => {
+          this.GetAllEntries();
+          this.showTable = true;
+        },
+        (errorResponse) => {
+          alert(errorResponse);
           console.log(errorResponse);
         })
   }
@@ -61,11 +67,15 @@ export class PhoneBookComponent {
     this.appservice.UpdatePhonebookEntry(this.selectedPhoneBookEntry.phoneBookEntryId, this.selectedPhoneBookEntry)
       .subscribe(
         (successResponse) => {
+          alert(successResponse);
+          console.log(successResponse);
+
           this.GetAllEntries();
           this.showTable = true;
         },
         (errorResponse) => {
-
+          alert(errorResponse);
+          console.log(errorResponse);
         }
       )
   }
@@ -74,9 +84,13 @@ export class PhoneBookComponent {
     this.appservice.RemovePhonebookEntry(phoneBookEntryId)
       .subscribe(
         (successResponse) => {
+          alert(successResponse);
+          console.log(successResponse);
+
           this.GetAllEntries();
         },
         (errorResponse) => {
+          alert(errorResponse);
           console.log(errorResponse);
         })
   }
