@@ -14,15 +14,15 @@
         </tr>
 
         <tbody>
-          <tr>
-            <td style="border: 2px solid black">Sample Id</td>
-            <td style="border: 2px solid black">Sample Firstname</td>
-            <td style="border: 2px solid black">Sample Surname</td>
-            <td style="border: 2px solid black">Sample PhoneNo</td>
+          <tr *ngFor="let phoneBook of phoneBookEntries">
+            <td style="border: 2px solid black">{{phoneBook.phoneBookEntryId}}</td>
+            <td style="border: 2px solid black">{{phoneBook.firstname}}</td>
+            <td style="border: 2px solid black">{{phoneBook.surname}}</td>
+            <td style="border: 2px solid black">{{phoneBook.phoneNumber}}</td>
             <td style="border: 2px solid black">
               <div style="margin: auto; display: flex; justify-content: center;">
-                <button style="margin-right: 5%">Edit</button>
-                <button>Remove</button>
+                <button (click)="UpdatePhonebookEntry" style="margin-right: 5%">Edit</button>
+                <button (click)="RemovePhonebookEntry">Remove</button>
               </div>
             </td>
           </tr>
