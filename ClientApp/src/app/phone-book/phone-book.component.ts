@@ -29,6 +29,10 @@ export class PhoneBookComponent {
 
   }
   ngOnInit(): void {
+    this.GetAllEntries();
+  }
+
+  GetAllEntries(){
     this.appservice.GetAllEntries()
       .subscribe(
         (successResponse) => {
@@ -41,11 +45,10 @@ export class PhoneBookComponent {
   }
 
   SaveNewPhonebookEntry() {
-    var temp = this.selectedPhoneBookEntry;
     this.appservice.SaveNewPhonebookEntry(this.selectedPhoneBookEntry)
       .subscribe(
         (successResponse) => {
-
+          this.showTable = true;
           console.log(successResponse);
 
         },(errorResponse) => {
@@ -53,39 +56,37 @@ export class PhoneBookComponent {
         })
   }
   
+  UpdatePhonebookEntry(){
+    this.appservice.UpdatePhonebookEntry(this.selectedPhoneBookEntry.phoneBookEntryId, this.selectedPhoneBookEntry)
+      .subscribe(
+        (successResponse) => {
+          this.showTable = true;
+        },
+        (errorResponse) => {
+
+        }
+      )
+  }
+
   RemovePhonebookEntry(phoneBookEntryId:number) {
     this.appservice.RemovePhonebookEntry(phoneBookEntryId)
       .subscribe(
         (successResponse) => {
-
+          this.GetAllEntries();
         },
         (errorResponse) => {
           console.log(errorResponse);
         })
   }
 
-  
+  bindSelected(phoneBookEntry:PhoneBookEntry){
+    this.selectedPhoneBookEntry.phoneBookEntryId = phoneBookEntry.phoneBookEntryId;
+    this.selectedPhoneBookEntry.firstname = phoneBookEntry.firstname;
+    this.selectedPhoneBookEntry.surname = phoneBookEntry.surname;
+    this.selectedPhoneBookEntry.phoneNumber = phoneBookEntry.phoneNumber;
 
-  UpdatePhonebookEntry(phoneBookEntryId:number,phoneBookEntry:PhoneBookEntry){
-      this.appservice.UpdatePhonebookEntry(phoneBookEntryId,phoneBookEntry)
-        .subscribe(
-          (successResponse) => {
-            
-          },
-          (errorResponse) => {
-
-          }
-        )
-    }
-
-    bindSelected(phoneBookEntry:PhoneBookEntry){
-      this.selectedPhoneBookEntry.phoneBookEntryId = phoneBookEntry.phoneBookEntryId;
-      this.selectedPhoneBookEntry.firstname = phoneBookEntry.firstname;
-      this.selectedPhoneBookEntry.surname = phoneBookEntry.surname;
-      this.selectedPhoneBookEntry.phoneNumber = phoneBookEntry.phoneNumber;
-
-      this.showTable = false;
-    };
+    this.showTable = false;
+  };
 
 }
 

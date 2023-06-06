@@ -28,6 +28,12 @@
           </tr>
         </tbody>
       </table>
+
+      <div style="margin-top: 15px;">
+        <span>Not seeing your info? Click <b>Add</b></span>
+        <br />
+        <button (click)="showTable = false">Add</button>
+      </div>
     </div>
     <br />
 
@@ -48,13 +54,8 @@
       <br>
       <br>
 
-      <button type="submit" (click)="SaveNewPhonebookEntry()" name="addButton">Submit</button>
-    </div>
-
-    <div style="margin-top: 15px;">
-      <span>Not seeing your info? Click <b>Add</b></span>
-      <br />
-      <button (click)="showTable = false">Add</button>
+      <button *ngIf="selectedPhoneBookEntry.phoneBookEntryId != 0" type="submit" (click)="UpdatePhonebookEntry()" name="addButton">Update</button>
+      <button *ngIf="selectedPhoneBookEntry.phoneBookEntryId == 0" type="submit" (click)="SaveNewPhonebookEntry()" name="addButton">Submit</button>
     </div>
     <br />
 

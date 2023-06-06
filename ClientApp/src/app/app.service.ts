@@ -28,17 +28,17 @@ export class AppService {
     return this.httpClient.post(this.baseApiUrl + '/phonebook/SaveNewPhonebookEntry', phonebookEntryRequest, {responseType: 'text'});
   }
 
-  UpdatePhonebookEntry(phoneBookEntryId: number, phoneRequest: PhoneBookEntry): Observable<PhoneBookEntry> {
+  UpdatePhonebookEntry(phoneBookEntryId: number, phoneRequest: PhoneBookEntry): Observable<string> {
     const phonebookEntryRequest: PhonebookEntryRequest = {
       phoneBookEntryId: phoneRequest.phoneBookEntryId,
       firstname: phoneRequest.firstname,
       surname: phoneRequest.surname,
       phoneNumber: phoneRequest.phoneNumber,
     }
-    return this.httpClient.put<PhoneBookEntry>(this.baseApiUrl + '/phonebook/UpdatePhonebookEntry/' + phoneBookEntryId, phonebookEntryRequest);
+    return this.httpClient.put(this.baseApiUrl + '/phonebook/UpdatePhonebookEntry/', phonebookEntryRequest, {responseType: 'text'});
   }
 
-  RemovePhonebookEntry(phoneBookEntryId: number): Observable<PhoneBookEntry> {
-    return this.httpClient.delete<PhoneBookEntry>(this.baseApiUrl + '/phonebook/RemovePhonebookEntry/' + phoneBookEntryId);
+  RemovePhonebookEntry(phoneBookEntryId: number): Observable<string> {
+    return this.httpClient.delete(this.baseApiUrl + '/phonebook/RemovePhonebookEntry?id=' + phoneBookEntryId, {responseType: 'text'});
   }
 }
