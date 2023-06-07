@@ -3,6 +3,7 @@ import { Component, Inject } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppService } from '../app.service';
 import { PhoneBookEntry } from '../models/phone-book-entry';
+import * as feather from 'feather-icons';
 
 @Component({
   selector: 'app-phone-book',
@@ -41,7 +42,7 @@ export class PhoneBookComponent {
           this.phoneBookEntries = successResponse
         },
         (errorResponse) => {
-          alert(errorResponse);
+          alert(errorResponse.error);
           console.log(errorResponse);
         }
       );
@@ -58,7 +59,8 @@ export class PhoneBookComponent {
           this.showTable = true;
         },
         (errorResponse) => {
-          alert(errorResponse);
+          debugger
+          alert(errorResponse.error);
           console.log(errorResponse);
         })
   }
@@ -74,7 +76,7 @@ export class PhoneBookComponent {
           this.showTable = true;
         },
         (errorResponse) => {
-          alert(errorResponse);
+          alert(errorResponse.error);
           console.log(errorResponse);
         }
       )
@@ -90,7 +92,7 @@ export class PhoneBookComponent {
           this.GetAllEntries();
         },
         (errorResponse) => {
-          alert(errorResponse);
+          alert(errorResponse.error);
           console.log(errorResponse);
         })
   }

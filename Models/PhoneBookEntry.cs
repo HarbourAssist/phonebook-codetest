@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.IdentityModel.Tokens;
 using PhoneBook.Repository;
 
 namespace PhoneBook.Models;
@@ -14,7 +15,6 @@ public partial class PhoneBookEntry
     public string Surname { get; set; } = null!;
 
     public string PhoneNumber { get; set; } = null!;
-
 
     private readonly IPhoneBookRepository _phoneBookRepository;
 
@@ -101,6 +101,26 @@ public partial class PhoneBookEntry
                 throw new Exception("A phone book entry is required");
             }
 
+            if (string.IsNullOrEmpty(phoneBookEntry.Firstname))
+            {
+                throw new Exception("A first name is required");
+            }
+
+            if (string.IsNullOrEmpty(phoneBookEntry.Surname))
+            {
+                throw new Exception("A surnname is required");
+            }
+            
+            if (string.IsNullOrEmpty(phoneBookEntry.PhoneNumber))
+            {
+                throw new Exception("A phone number is required");
+            }
+
+            if (phoneBookEntry.PhoneNumber.Length < 10 || phoneBookEntry.PhoneNumber.Length > 15)
+            {
+                throw new Exception("A phone number must be between 10 & 15 characters long");
+            }
+
             //Validate the phone book entry
             var validationResult = ValidateEntry(phoneBookEntry);
 
@@ -139,7 +159,7 @@ public partial class PhoneBookEntry
         catch (Exception e)
         {
             //LOG ERROR to LogFile with actual error details and throw custom error to front end
-            throw new Exception("Saved failed, please check your entries and try again");
+            throw new Exception(e.Message);
         }
     }
 
@@ -191,6 +211,11 @@ public partial class PhoneBookEntry
             if (string.IsNullOrEmpty(phoneBookEntry.Firstname))
             {
                 return new Tuple<bool, string>(false, "Fistname is required");
+            }
+            
+            if (string.IsNullOrEmpty(phoneBookEntry.Surname))
+            {
+                return new Tuple<bool, string>(false, "Surname is required");
             }
 
             if (string.IsNullOrEmpty(phoneBookEntry.PhoneNumber))

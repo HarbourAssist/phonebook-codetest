@@ -41,12 +41,13 @@
 
 
     <div *ngIf="showTable == false" id="addSection" class="" style="border: solid 2px white; border-radius: 50px; margin: auto; width: 600px;">
+
       <div id="headingSection" class="d-flex mt-2" style="justify-content: center; color: white">
         <div *ngIf="selectedPhoneBookEntry.phoneBookEntryId != 0">
-          <h1>User Details Update</h1>
+          <h1 style="font-weight: bold">User Details Update</h1>
         </div>
         <div *ngIf="selectedPhoneBookEntry.phoneBookEntryId == 0">
-          <h1>User Details Add</h1>
+          <h1 style="font-weight: bold">User Details Add</h1>
         </div>
       </div>
 
@@ -54,10 +55,11 @@
 
         <div class="row mt-4 ml-2">
           <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <i class="fa fa-info-circle"></i>
             <label class="mr-4" style="color: white; width: 150px;"><h3>First Name:  </h3></label>
             <input [(ngModel)]="selectedPhoneBookEntry.firstname" style="width: 60%;" class="mr-2" type="text" placeholder="Eg: John" name="firstname" minlength="3" required>
 
-            <!--Validation-->
+            <!--Validation - Done in backend-->
             <!--<div *ngIf="selectedPhoneBookEntry.firstname.invalid && (selectedPhoneBookEntry.firstname.dirty || selectedPhoneBookEntry.firstname.touched)"
              class="alert">
 
@@ -67,9 +69,7 @@
               <div *ngIf="selectedPhoneBookEntry.firstname.errors?.['minlength']">
                 Name must be at least 3 characters long.
               </div>
-
             </div>-->
-
 
           </div>
         </div>
@@ -81,7 +81,7 @@
             <label class="mr-4" style="color: white; width: 150px;"><h3>Surname: </h3></label>
             <input [(ngModel)]="selectedPhoneBookEntry.surname" class="mr-2" style="width: 60%;" type="text" placeholder="Eg: Doe" name="surname" minlength="3" required>
 
-            <!--Validation-->
+            <!--Validation - Done in backend-->
             <!--<div *ngIf="selectedPhoneBookEntry.surname.invalid && (selectedPhoneBookEntry.surname.dirty || selectedPhoneBookEntry.surname.touched)"
              class="alert">
 
@@ -91,7 +91,6 @@
               <div *ngIf="selectedPhoneBookEntry.surname.errors?.['minlength']">
                 Surname must be at least 3 characters long.
               </div>
-
             </div>-->
 
           </div>
@@ -104,7 +103,7 @@
             <label class="mr-4" style="color: white; width: 150px;"><h3>Phone No:  </h3></label>
             <input [(ngModel)]="selectedPhoneBookEntry.phoneNumber" class="mr-2" style="width: 60%;" type="text" name="phoneNumber" placeholder="Eg: 074 512 5487" minlength="10" maxlength="15" required >
 
-            <!--Validation-->
+            <!--Validation - Done in backend-->
             <!--<div *ngIf="selectedPhoneBookEntry.phoneNumber.invalid && (selectedPhoneBookEntry.phoneNumber.dirty || selectedPhoneBookEntry.phoneNumber.touched)"
              class="alert">
 
@@ -117,7 +116,6 @@
               <div *ngIf="selectedPhoneBookEntry.phoneNumber.errors?.['minlength']">
                 Phone number cannot exceed 15 characters long.
               </div>
-
             </div>-->
 
           </div>
@@ -126,6 +124,7 @@
         <br>
 
         <div class="row mb-4">
+
           <div id="updateSection" *ngIf="selectedPhoneBookEntry.phoneBookEntryId != 0" class="m-auto">
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 float-right text-right">
               <button class="btn btn-success bs-tooltip" title="Click to save info" type="submit" (click)="UpdatePhonebookEntry()" name="addButton">Update</button>
@@ -145,6 +144,7 @@
               <button class="btn btn-warning bs-tooltip" title="Click to navigate back" type="submit" (click)="showTable = true" name="addButton">Back</button>
             </div>
           </div>
+
         </div>
 
       </form>
