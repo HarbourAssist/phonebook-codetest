@@ -5,7 +5,9 @@ VisualStudioVersion = 17.5.33502.453
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBook", "PhoneBook\PhoneBook.csproj", "{63E30FDA-0D06-437F-8CA1-631A34273B89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneBook.Tests", "PhoneBook.Tests\PhoneBook.Tests.csproj", "{8526628B-CCF3-4B15-8482-667430B8EAD2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBook.Tests", "PhoneBook.Tests\PhoneBook.Tests.csproj", "{8526628B-CCF3-4B15-8482-667430B8EAD2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneBook.Integration.Tests", "PhoneBook.Integration.Tests\PhoneBook.Integration.Tests.csproj", "{88625545-8339-4CC8-85BB-58BBE4CEA245}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{8526628B-CCF3-4B15-8482-667430B8EAD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8526628B-CCF3-4B15-8482-667430B8EAD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8526628B-CCF3-4B15-8482-667430B8EAD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88625545-8339-4CC8-85BB-58BBE4CEA245}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88625545-8339-4CC8-85BB-58BBE4CEA245}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88625545-8339-4CC8-85BB-58BBE4CEA245}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88625545-8339-4CC8-85BB-58BBE4CEA245}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
