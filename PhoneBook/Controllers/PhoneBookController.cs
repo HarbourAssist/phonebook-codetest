@@ -4,17 +4,16 @@ using PhoneBook.Models;
 namespace PhoneBook.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class PhoneBookController : ControllerBase
     {
-        public PhoneBookController()
-        {
-        }
-
         [HttpGet]
-        public List<PhoneBookEntry> Get()
+        public List<PhoneBookEntry> GetAll()
         {
-            throw new NotImplementedException();
+            return new List<PhoneBookEntry> { 
+                new PhoneBookEntry { PhoneBookEntryId = 1, Firstname = "Jacca", Surname = "Hooper", PhoneNumber = "01234567890" },
+                new PhoneBookEntry { PhoneBookEntryId = 1, Firstname = "Joe", Surname = "Bloggs", PhoneNumber = "98765432101" },
+            };
         }
     }
 }
