@@ -1,4 +1,4 @@
-export interface PhoneBookEntry {
+export interface IPhoneBookEntry {
   phoneBookEntryId: number;
   firstname: number;
   surname: number;

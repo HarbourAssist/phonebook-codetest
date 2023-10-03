@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PhoneBook.Models;
 using PhoneBook.Models.Input;
+using PhoneBook.Services;
 
 namespace PhoneBook.Controllers
 {
@@ -8,61 +9,35 @@ namespace PhoneBook.Controllers
     [Route("api/[controller]")]
     public class PhoneBookController : ControllerBase
     {
-        private readonly PhoneBookContext _phoneBookContext;
+        private readonly IPhoneBookService _phoneBookService;
 
-        public PhoneBookController(PhoneBookContext phoneBookContext)
+        public PhoneBookController(IPhoneBookService phoneBookService)
         {
-            _phoneBookContext = phoneBookContext;
+            _phoneBookService = phoneBookService;
         }
 
         [HttpGet]
         public IEnumerable<PhoneBookEntry> GetAll()
         {
-            var phoneBookEntries = _phoneBookContext.PhoneBookEntries;
-            return phoneBookEntries;
+            return _phoneBookService.GetAll();
         }
 
         [HttpPost]
         public PhoneBookEntry Create(NewPhoneBookEntry newPhoneBookEntry)
         {
-            var phoneBookEntry = new PhoneBookEntry
-            {
-                Firstname = newPhoneBookEntry.Firstname,
-                Surname = newPhoneBookEntry.Surname,
-                PhoneNumber = newPhoneBookEntry.PhoneNumber,
-            };
-            _phoneBookContext.PhoneBookEntries.Add(phoneBookEntry);
-            _phoneBookContext.SaveChanges();
-            
-            return phoneBookEntry;
+            return _phoneBookService.Add(newPhoneBookEntry);
         }
 
         [HttpPatch("{id}")]
         public PhoneBookEntry Update(int id, PhoneBookEntry updatedPhoneBookEntry)
         {
-            var entry = _phoneBookContext.PhoneBookEntries.SingleOrDefault(p => p.PhoneBookEntryId == id);
-
-            if (entry == null)
-                throw new ArgumentOutOfRangeException($"Could not find phone book entry {nameof(updatedPhoneBookEntry.PhoneBookEntryId)}={updatedPhoneBookEntry.PhoneBookEntryId}");
-
-            entry.Firstname = updatedPhoneBookEntry.Firstname;
-            entry.Surname = updatedPhoneBookEntry.Surname;
-            entry.PhoneNumber = updatedPhoneBookEntry.PhoneNumber;
-            
-            _phoneBookContext.SaveChanges();
-            return entry;
+            return _phoneBookService.Edit(id, updatedPhoneBookEntry);
         }
 
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            var entry = _phoneBookContext.PhoneBookEntries.SingleOrDefault(p => p.PhoneBookEntryId == id);
-
-            if (entry == null)
-                throw new ArgumentOutOfRangeException($"Could not find phone book entry with {nameof(id)}={id}");
-
-            _phoneBookContext.PhoneBookEntries.Remove(entry);
-            _phoneBookContext.SaveChanges();
+            _phoneBookService.Remove(id);
         }
     }
 }

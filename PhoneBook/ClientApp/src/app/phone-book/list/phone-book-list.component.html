@@ -1,0 +1,8 @@
+
+<a class="btn btn-primary" (click)="toggleAdd()">Add</a>
+
+<app-phone-book-form *ngIf="isAddEnabled" [(isFormEnabled)]="isAddEnabled"></app-phone-book-form>
+
+<app-phone-book-item *ngFor="let entry of PhoneBookEntries" [phoneBookEntry]="entry">
+</app-phone-book-item>
+

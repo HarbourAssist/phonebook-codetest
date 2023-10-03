@@ -1,0 +1,9 @@
+<div>
+    <h2>{{phoneBookEntry.firstname}} {{phoneBookEntry.surname}}</h2>
+    <a class="btn btn-secondary" (click)="toggleEdit()">Edit</a>
+    <a class="btn btn-warning" (click)="delete()">Delete</a>
+    
+    {{phoneBookEntry.phoneNumber}}
+  <app-phone-book-form [phoneBookEntry]="phoneBookEntry" *ngIf="isEditEnabled"></app-phone-book-form>
+</div>
+<hr />

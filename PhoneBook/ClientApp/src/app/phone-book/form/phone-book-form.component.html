@@ -1,0 +1,18 @@
+<h1>Form</h1>
+
+<form [formGroup]="phoneEntryForm" (ngSubmit)="onSubmit()">
+
+  <input type="number" formControlName="phoneBookEntryId" hidden>
+
+  <label for="first-name">First Name: </label>
+  <input id="first-name" type="text" formControlName="firstName">
+
+  <label for="surname">Surname: </label>
+  <input id="surname" type="text" formControlName="surname">
+
+  <label for="phone-number">Phone Number: </label>
+  <input id="phone-number" type="text" formControlName="phoneNumber">
+
+  <p>Please populate all fields</p>
+  <button class="btn btn-primary" type="submit" [disabled]="!phoneEntryForm.valid">Save</button>
+</form>

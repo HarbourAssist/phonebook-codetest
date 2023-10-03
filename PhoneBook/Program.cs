@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using PhoneBook.Models;
+using PhoneBook.Repositories;
+using PhoneBook.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,9 @@ builder.Services.AddDbContext<PhoneBookContext>(options =>
 {
     options.UseSqlServer("Server=.\\SQLExpress;Database=PhoneBook;Trusted_Connection=True;TrustServerCertificate=true");
 });
+
+builder.Services.AddTransient<IPhoneBookRepository, PhoneBookRepository>();
+builder.Services.AddTransient<IPhoneBookService, PhoneBookService>();
 
 var app = builder.Build();
 
