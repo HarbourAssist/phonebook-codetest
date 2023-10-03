@@ -76,7 +76,7 @@
             },
             "development": {
               "browserTarget": "PhoneBook:build:development",
-              "proxyConfig": "proxy.conf.js"
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
