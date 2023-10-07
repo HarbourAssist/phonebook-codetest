@@ -18,3 +18,12 @@ code {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+
+.form-group .form-control {
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  margin-bottom: .5rem;
+}
