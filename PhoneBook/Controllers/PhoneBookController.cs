@@ -16,5 +16,11 @@ namespace PhoneBook.Controllers
         {
             throw new NotImplementedException();
         }
+
+        [HttpPost]
+        public ActionResult CreatePhoneBookEntry(PhoneBookEntry entry)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

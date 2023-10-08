@@ -7,15 +7,16 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PhoneBookService {
-  private phoneBookUrl = 'http://localhost:5000/api/phonebook';
+  private phoneBookUrl = 'https://localhost:44425/phonebook';
   
   constructor(
     private http: HttpClient,
     // @Inject('BASE_URL') private baseUrl: string
   ) { }
 
-  addPhoneBookEntry(entry: PhoneBookEntry): number {
-return 1;
+  addPhoneBookEntry(entry: PhoneBookEntry): Observable<PhoneBookEntry> {
+    debugger;
+    return this.http.post<PhoneBookEntry>(this.phoneBookUrl, entry);
   }
 
   getPhoneBookEntries(): Observable<PhoneBookEntry[]> {

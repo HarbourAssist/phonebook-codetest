@@ -15,6 +15,7 @@ export class PhoneBookComponent {
     surname: ['', Validators.required],
     phoneNumber: ['', Validators.required],
   });
+  result: string = '';
 
   get firstName() { return this.phoneBookEntryForm.get('firstName'); }
   get surname() { return this.phoneBookEntryForm.get('surname'); }
@@ -32,7 +33,11 @@ export class PhoneBookComponent {
       this.phoneBookEntryForm.value.surname ?? '',
       this.phoneBookEntryForm.value.phoneNumber ?? '');
     
-    this.phoneBookService.addPhoneBookEntry(newPhoneBookEntry);
+    this.phoneBookService.addPhoneBookEntry(newPhoneBookEntry)
+    .subscribe(data => {
+      this.result = data.phoneBookEntryId != 0 ?'success': 'save has failed';
+    }
+    );
   }
 }
 
