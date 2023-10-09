@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { PhoneBookService } from '../phone-book.service';
 import { PhoneBookEntry } from '../models/phone-book-entry';
 
@@ -7,9 +7,12 @@ import { PhoneBookEntry } from '../models/phone-book-entry';
   templateUrl: './phone-book.component.html',
   styleUrls: ['./phone-book.component.css']
 })
-export class PhoneBookComponent {
+export class PhoneBookComponent implements OnInit{
   phoneBookEntriesList: PhoneBookEntry[] = [];
   selectedEntry?: PhoneBookEntry;
+  ModalTitle = "";
+  showAddOrEditPhoneBookEntryComponent: boolean = false;
+  @ViewChild('modalClose') modalCloseBtn?: ElementRef;
 
   constructor(
     private phoneBookService: PhoneBookService
@@ -17,39 +20,49 @@ export class PhoneBookComponent {
   }
 
   ngOnInit(): void {
+     this.loadPhoneBookEntriesList();   
+  }
+
+  loadPhoneBookEntriesList(){
     this.phoneBookService
       .getPhoneBookEntries()
       .subscribe((data: PhoneBookEntry[]) => 
       {
-        debugger;
         this.phoneBookEntriesList = data;
-      });    
+      });
   }
 
+  addPhoneBookEntryClick(): void {
+    this.ModalTitle = "Add phone book entry";
+    this.showAddOrEditPhoneBookEntryComponent = true;
+  }
   
-  editSelected(phoneBookEntryEdited: PhoneBookEntry): void {
+  editPhoneBookEntryClick(phoneBookEntryEdited: PhoneBookEntry): void {
     this.selectedEntry = phoneBookEntryEdited;
-    this.phoneBookService
-      .updatePhoneBookEntry(phoneBookEntryEdited)
-      .subscribe((data: any) => 
-      {
-        debugger;
-        this.phoneBookEntriesList = data;
-        this.selectedEntry = undefined;
-      });   
+    this.ModalTitle = "Edit phone book entry";
+    this.showAddOrEditPhoneBookEntryComponent = true;
   }
 
   deleteSelected(id?: number): void {
-    if(id){
+    if (confirm('Are you sure you want to delete the entry?') && id) {
       this.phoneBookService
       .deletePhoneBookEntry(id)
-      .subscribe((data: any) => 
+      .subscribe(() => 
       {
-        debugger;
-        this.phoneBookEntriesList = data;
-        this.selectedEntry = undefined;
+        this.loadPhoneBookEntriesList();
       });
-    }    
+    }
+  }
+  
+  closePhoneBookEntryClick(): void {
+    this.showAddOrEditPhoneBookEntryComponent = false;
+    this.loadPhoneBookEntriesList();
+  }
+
+  phoneBookRecordAddedOrUpdated(): void{
+    alert("Phone book entry has been saved.");
+    this.modalCloseBtn?.nativeElement.click();
+    this.loadPhoneBookEntriesList();
   }
 }
 

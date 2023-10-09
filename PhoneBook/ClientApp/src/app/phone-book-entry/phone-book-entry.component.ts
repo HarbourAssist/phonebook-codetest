@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { Validators, FormBuilder } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { PhoneBookService } from '../phone-book.service';
 import { PhoneBookEntry } from '../models/phone-book-entry';
 
@@ -9,13 +9,14 @@ import { PhoneBookEntry } from '../models/phone-book-entry';
   templateUrl: './phone-book-entry.component.html',
   styleUrls: ['./phone-book-entry.component.css']
 })
-export class PhoneBookEntryComponent {
+export class PhoneBookEntryComponent implements OnInit {
   @Input() phoneBookEntry?: PhoneBookEntry;
+  @Output() phoneBookUpdatedEvent = new EventEmitter();
 
-  phoneBookEntryForm = this.fb.group({
-    firstName: [this.phoneBookEntry?.firstName ?? '', Validators.required],
-    surname: [this.phoneBookEntry?.surname ??'', Validators.required],
-    phoneNumber: [this.phoneBookEntry?.phoneNumber ??'', Validators.required],
+  phoneBookEntryForm: FormGroup = this.fb.group({
+    firstName: ['', Validators.required],
+    surname: ['', Validators.required],
+    phoneNumber: ['', Validators.required],
   });
 
   get firstName() { return this.phoneBookEntryForm.get('firstName'); }
@@ -29,16 +30,33 @@ export class PhoneBookEntryComponent {
   ) {
   }
 
-  createPhoneBookEntry() {
-    let newPhoneBookEntry = new PhoneBookEntry(
-      this.phoneBookEntryForm.value.firstName ?? '',
-      this.phoneBookEntryForm.value.surname ?? '',
-      this.phoneBookEntryForm.value.phoneNumber ?? '');
-    
-    this.phoneBookService.addPhoneBookEntry(newPhoneBookEntry)
-    .subscribe(data => {
-      this.router.navigate(['/phone-book']);
+  ngOnInit(): void {
+    this.phoneBookEntryForm.controls.firstName.setValue(this.phoneBookEntry?.firstName);
+    this.phoneBookEntryForm.controls.surname.setValue(this.phoneBookEntry?.surname);
+    this.phoneBookEntryForm.controls.phoneNumber.setValue(this.phoneBookEntry?.phoneNumber);
+  }
+
+  addOrUpdateEntry(): void {
+    let phoneBookEntryToSave = new PhoneBookEntry(
+      this.phoneBookEntryForm.value.firstName,
+      this.phoneBookEntryForm.value.surname,
+      this.phoneBookEntryForm.value.phoneNumber);
+
+    if(this.phoneBookEntry?.phoneBookEntryId && this.phoneBookEntry?.phoneBookEntryId != 0){
+      phoneBookEntryToSave.phoneBookEntryId = this.phoneBookEntry?.phoneBookEntryId;
+      this.phoneBookService
+      .updatePhoneBookEntry(phoneBookEntryToSave)
+      .subscribe(() => 
+      {
+        this.phoneBookUpdatedEvent.emit();
+      });   
     }
-    );
+    else{
+      this.phoneBookService.addPhoneBookEntry(phoneBookEntryToSave)
+      .subscribe(() => {
+        this.phoneBookUpdatedEvent.emit();
+      }
+      );
+    }
   }
 }

@@ -1,5 +1,5 @@
-<h2 class="section-heading">Add/edit phone book entry</h2>
-      <form [formGroup]="phoneBookEntryForm" (submit)="createPhoneBookEntry()" class="form-group">
+
+      <form [formGroup]="phoneBookEntryForm" (submit)="addOrUpdateEntry()" class="form-group">
         <label for="first-name">First Name</label>
         <input id="first-name" type="text" formControlName="firstName" class="form-control">
         <div *ngIf="firstName?.invalid && (firstName?.dirty || firstName?.touched)" class="alert alert-danger">
@@ -25,5 +25,5 @@
         </div>
 
         <div *ngIf="!phoneBookEntryForm.valid">Complete the form to enable button.</div>
-        <button type="submit" class="primary" [disabled]="!phoneBookEntryForm.valid">Save</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!phoneBookEntryForm.valid">Save</button>
       </form>
