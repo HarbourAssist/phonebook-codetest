@@ -7,8 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PhoneBookService {
-  private phoneBookUrl = 'https://localhost:44425/phonebook/';
-  
+ 
   constructor(
     private http: HttpClient,
     @Inject('BASE_URL') private baseUrl: string
@@ -16,18 +15,18 @@ export class PhoneBookService {
 
   public getPhoneBookEntries(): Observable<PhoneBookEntry[]> {
     debugger;
-    return this.http.get<PhoneBookEntry[]>(this.phoneBookUrl + 'list');
+    return this.http.get<PhoneBookEntry[]>(this.baseUrl + 'phonebook/list');
   }
 
   public addPhoneBookEntry(entry: PhoneBookEntry): Observable<PhoneBookEntry> {
-    return this.http.post<PhoneBookEntry>(this.phoneBookUrl, entry);
+    return this.http.post<PhoneBookEntry>(this.baseUrl + 'phonebook/', entry);
   }
 
   public updatePhoneBookEntry(entry: PhoneBookEntry): Observable<any> {
-    return this.http.put<any>(this.phoneBookUrl, entry);
+    return this.http.put<any>(this.baseUrl + 'phonebook/' + entry.phoneBookEntryId, entry);
   }
 
   public deletePhoneBookEntry(entryId: number): Observable<any> {
-    return this.http.delete<any>(this.phoneBookUrl + entryId);
+    return this.http.delete<any>(this.baseUrl + 'phonebook/' + entryId);
   }
 }
