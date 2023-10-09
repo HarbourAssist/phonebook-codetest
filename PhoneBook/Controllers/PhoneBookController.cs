@@ -31,8 +31,8 @@ namespace PhoneBook.Controllers
             return CreatedAtAction(nameof(GetPhoneBookEntries), entry);
         }
 
-        // PUT: phonebook/{id}
-        [HttpPut("{id}")]
+        // PUT: phonebook/{entryId}
+        [HttpPut("{entryId}")]
         public async Task<ActionResult<PhoneBookEntry>> EditPhoneBookEntry(long entryId, PhoneBookEntry entry)
         {
             if (entryId != entry.PhoneBookEntryId)
@@ -52,8 +52,8 @@ namespace PhoneBook.Controllers
             return NoContent();
         }
 
-        // DELETE: phonebook/{id}
-        [HttpDelete]
+        // DELETE: phonebook/{entryId}
+        [HttpDelete("{entryId}")]
         public async Task<ActionResult> DeletePhoneBookEntry(long entryId)
         {
             try
