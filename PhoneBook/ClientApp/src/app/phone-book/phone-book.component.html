@@ -1,29 +1,31 @@
-<h2 class="section-heading">Add new phone book entry</h2>
-      <form [formGroup]="phoneBookEntryForm" (submit)="createPhoneBookEntry()" class="form-group">
-        <label for="first-name">First Name</label>
-        <input id="first-name" type="text" formControlName="firstName" class="form-control">
-        <div *ngIf="firstName?.invalid && (firstName?.dirty || firstName?.touched)" class="alert alert-danger">
-          <div *ngIf="firstName?.errors?.['required']">
-            First Name is required.
-          </div>
-        </div>
+<h2>My Phone book</h2>
 
-        <label for="surname">Last Name</label>
-        <input id="surname" type="text" formControlName="surname" class="form-control">
-        <div *ngIf="surname?.invalid && (surname?.dirty || surname?.touched)" class="alert alert-danger">
-          <div *ngIf="surname?.errors?.['required']">
-            Surname is required.
-          </div>
-        </div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Surname</th>
+      <th scope="col">Phone number</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let phoneBookEntry of phoneBookEntriesList; let i = index">
+      <th scope="row">{{i+1}}</th>
+      <td>{{phoneBookEntry.firstName}}</td>
+      <td>{{phoneBookEntry.surname}}</td>
+      <td>{{phoneBookEntry.phoneNumber}}</td>
+      <td>
+        <button type="button" (click)="editSelected(phoneBookEntry)">Edit</button>
+        <button type="button" (click)="deleteSelected(phoneBookEntry.phoneBookEntryId)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-        <label for="phoneNumber">Phone number</label>
-        <input id="phoneNumber" type="phone" formControlName="phoneNumber" class="form-control">
-        <div *ngIf="phoneNumber?.invalid && (phoneNumber?.dirty || phoneNumber?.touched)" class="alert alert-danger">
-          <div *ngIf="phoneNumber?.errors?.['required']">
-            Phone number is required.
-          </div>
-        </div>
+<div *ngIf="selectedEntry">
+  <app-phone-book-entry [phoneBookEntry]="selectedEntry"></app-phone-book-entry>
+</div>
 
-        <div *ngIf="!phoneBookEntryForm.valid">Complete the form to enable button.</div>
-        <button type="submit" class="primary" [disabled]="!phoneBookEntryForm.valid">Add new</button>
-      </form>
+

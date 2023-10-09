@@ -1,5 +1,5 @@
 export class PhoneBookEntry {
-  public phoneBookEntryId: number = 0;
+  public phoneBookEntryId?: number;
   public firstName: string;
   public surname: string;
   public phoneNumber: string;

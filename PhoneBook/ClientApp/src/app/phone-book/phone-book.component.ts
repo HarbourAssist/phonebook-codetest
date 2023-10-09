@@ -1,6 +1,4 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, Inject } from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
+import { Component } from '@angular/core';
 import { PhoneBookService } from '../phone-book.service';
 import { PhoneBookEntry } from '../models/phone-book-entry';
 
@@ -10,34 +8,48 @@ import { PhoneBookEntry } from '../models/phone-book-entry';
   styleUrls: ['./phone-book.component.css']
 })
 export class PhoneBookComponent {
-  phoneBookEntryForm = this.fb.group({
-    firstName: ['', Validators.required],
-    surname: ['', Validators.required],
-    phoneNumber: ['', Validators.required],
-  });
-  result: string = '';
-
-  get firstName() { return this.phoneBookEntryForm.get('firstName'); }
-  get surname() { return this.phoneBookEntryForm.get('surname'); }
-  get phoneNumber() { return this.phoneBookEntryForm.get('phoneNumber'); }
+  phoneBookEntriesList: PhoneBookEntry[] = [];
+  selectedEntry?: PhoneBookEntry;
 
   constructor(
-    private phoneBookService: PhoneBookService,
-    private fb: FormBuilder
+    private phoneBookService: PhoneBookService
   ) {
   }
 
-  createPhoneBookEntry() {
-    let newPhoneBookEntry = new PhoneBookEntry(
-      this.phoneBookEntryForm.value.firstName ?? '',
-      this.phoneBookEntryForm.value.surname ?? '',
-      this.phoneBookEntryForm.value.phoneNumber ?? '');
-    
-    this.phoneBookService.addPhoneBookEntry(newPhoneBookEntry)
-    .subscribe(data => {
-      this.result = data.phoneBookEntryId != 0 ?'success': 'save has failed';
-    }
-    );
+  ngOnInit(): void {
+    this.phoneBookService
+      .getPhoneBookEntries()
+      .subscribe((data: PhoneBookEntry[]) => 
+      {
+        debugger;
+        this.phoneBookEntriesList = data;
+      });    
+  }
+
+  
+  editSelected(phoneBookEntryEdited: PhoneBookEntry): void {
+    this.selectedEntry = phoneBookEntryEdited;
+    this.phoneBookService
+      .updatePhoneBookEntry(phoneBookEntryEdited)
+      .subscribe((data: any) => 
+      {
+        debugger;
+        this.phoneBookEntriesList = data;
+        this.selectedEntry = undefined;
+      });   
+  }
+
+  deleteSelected(id?: number): void {
+    if(id){
+      this.phoneBookService
+      .deletePhoneBookEntry(id)
+      .subscribe((data: any) => 
+      {
+        debugger;
+        this.phoneBookEntriesList = data;
+        this.selectedEntry = undefined;
+      });
+    }    
   }
 }
 
