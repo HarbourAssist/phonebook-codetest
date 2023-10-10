@@ -1,16 +1,21 @@
 using Microsoft.EntityFrameworkCore;
 using PhoneBook.Models;
+using PhoneBook.Repositories;
+using PhoneBook.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllers();
 
 builder.Services.AddDbContext<PhoneBookContext>(options =>
 {
-    options.UseSqlServer("Server=.\\SQLExpress;Database=PhoneBook;Trusted_Connection=True;TrustServerCertificate=true");
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SysConfigContext"));
 });
+
+builder.Services.AddScoped<IPhoneBookRepository, PhoneBookRepository>();
+builder.Services.AddScoped<IPhoneBookService, PhoneBookService>();
 
 var app = builder.Build();
 
@@ -25,9 +30,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller}/{action=Index}/{id?}");
+app.MapControllers();
 
 app.MapFallbackToFile("index.html");
 
