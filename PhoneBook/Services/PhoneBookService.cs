@@ -12,24 +12,24 @@ namespace PhoneBook.Services
             _repository = repository;
         }
 
-        public async Task CreateAsync(PhoneBookEntry phoneBookEntry)
+        public Task CreateAsync(PhoneBookEntry phoneBookEntry)
         {
-            await _repository.CreateAsync(phoneBookEntry);
+            return _repository.CreateAsync(phoneBookEntry);
         }
 
-        public async Task<IEnumerable<PhoneBookEntry>> ListAsync()
+        public Task<IEnumerable<PhoneBookEntry>> ListAsync()
         {
-            return await _repository.ListAsync();
+            return _repository.ListAsync();
         }
 
-        public async Task UpdateAsync(PhoneBookEntry phoneBookEntry)
+        public Task UpdateAsync(PhoneBookEntry phoneBookEntry)
         {
-            await _repository.UpdateAsync(phoneBookEntry);
+            return _repository.UpdateAsync(phoneBookEntry);
         }
 
-        public async Task DeleteAsync(long phoneBookEntryId)
+        public Task DeleteAsync(long phoneBookEntryId)
         {
-            await _repository.DeleteAsync(phoneBookEntryId);
+            return _repository.DeleteAsync(phoneBookEntryId);
         }
     }
 }

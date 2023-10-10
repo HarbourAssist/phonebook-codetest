@@ -44,7 +44,7 @@ namespace PhoneBook.Controllers
             {
                 await _phoneBookService.UpdateAsync(entry);
             }
-            catch (Exception)
+            catch (InvalidOperationException)
             {
                 return NotFound();
             }
@@ -60,7 +60,7 @@ namespace PhoneBook.Controllers
             {
                 await _phoneBookService.DeleteAsync(entryId);
             }
-            catch (Exception)
+            catch (InvalidOperationException)
             {
                 return NotFound();
             }

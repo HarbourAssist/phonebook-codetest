@@ -33,6 +33,10 @@ namespace PhoneBook.Repositories
                 _context.PhoneBookEntries.Attach(originalPhoneBookEntry).CurrentValues.SetValues(Map(phoneBookEntry));
                 await _context.SaveChangesAsync();
             }
+            else
+            {
+                throw new InvalidOperationException();
+            }
         }
 
         public async Task DeleteAsync(long phoneBookEntryId)
@@ -42,6 +46,10 @@ namespace PhoneBook.Repositories
             {
                 _context.PhoneBookEntries.Remove(dbPhoneBookEntry);
                 await _context.SaveChangesAsync();
+            }
+            else
+            {
+                throw new InvalidOperationException();
             }
         }
 

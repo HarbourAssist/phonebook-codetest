@@ -83,7 +83,7 @@ namespace PhoneBook.Tests
             var phoneBookEntry = new PhoneBookEntry { PhoneBookEntryId = 1 };
             _phoneBookServiceMock
                 .Setup(s => s.UpdateAsync(phoneBookEntry))
-                .ThrowsAsync(new Exception());
+                .ThrowsAsync(new InvalidOperationException());
 
             var response = await _controller.EditPhoneBookEntry(1, phoneBookEntry);
 
