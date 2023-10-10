@@ -1,0 +1,29 @@
+
+      <form [formGroup]="phoneBookEntryForm" (submit)="addOrUpdateEntry()" class="form-group">
+        <label for="first-name">First Name</label>
+        <input id="first-name" type="text" formControlName="firstName" class="form-control">
+        <div *ngIf="firstName?.invalid && (firstName?.dirty || firstName?.touched)" class="alert alert-danger">
+          <div *ngIf="firstName?.errors?.['required']">
+            First Name is required.
+          </div>
+        </div>
+
+        <label for="surname">Last Name</label>
+        <input id="surname" type="text" formControlName="surname" class="form-control">
+        <div *ngIf="surname?.invalid && (surname?.dirty || surname?.touched)" class="alert alert-danger">
+          <div *ngIf="surname?.errors?.['required']">
+            Surname is required.
+          </div>
+        </div>
+
+        <label for="phoneNumber">Phone number</label>
+        <input id="phoneNumber" type="phone" formControlName="phoneNumber" class="form-control">
+        <div *ngIf="phoneNumber?.invalid && (phoneNumber?.dirty || phoneNumber?.touched)" class="alert alert-danger">
+          <div *ngIf="phoneNumber?.errors?.['required']">
+            Phone number is required.
+          </div>
+        </div>
+
+        <div *ngIf="!phoneBookEntryForm.valid">Complete the form to enable button.</div>
+        <button type="submit" class="btn btn-primary" [disabled]="!phoneBookEntryForm.valid">Save</button>
+      </form>

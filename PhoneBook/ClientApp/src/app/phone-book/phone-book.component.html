@@ -1,1 +1,51 @@
+<h2>My Phone book</h2>
+
+<button type="button" class="btn btn-primary m-2 float-end" data-bs-toggle="modal" data-bs-target="#addOrEditPhoneBookEntryModal"
+  (click)="addPhoneBookEntryClick()">
+  Add phone book record
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="addOrEditPhoneBookEntryModal" tabindex="-1" aria-labelledby="addOrEditPhoneBookEntryModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addOrEditPhoneBookEntryModalLabel">{{ ModalTitle }}</h5>
+        <button type="button" class="btn-close" #modalClose data-bs-dismiss="modal" aria-label="Close" (click)="closePhoneBookEntryClick()">
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-phone-book-entry [phoneBookEntry]="selectedEntry" *ngIf="showAddOrEditPhoneBookEntryComponent" 
+        (phoneBookUpdatedEvent)="phoneBookRecordAddedOrUpdated()">
+        </app-phone-book-entry>
+      </div>
+    </div>
+  </div>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Surname</th>
+      <th scope="col">Phone number</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let phoneBookEntry of phoneBookEntriesList; let i = index">
+      <th scope="row">{{i+1}}</th>
+      <td>{{phoneBookEntry.firstName}}</td>
+      <td>{{phoneBookEntry.surname}}</td>
+      <td>{{phoneBookEntry.phoneNumber}}</td>
+      <td>
+        <button type="button" class="btn btn-primary m-1" data-bs-toggle="modal" data-bs-target="#addOrEditPhoneBookEntryModal" (click)="editPhoneBookEntryClick(phoneBookEntry)">Edit</button>
+        <button type="button" class="btn btn-danger m-1" (click)="deleteSelected(phoneBookEntry.phoneBookEntryId)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 
